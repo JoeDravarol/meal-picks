@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -36,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RecipeCard = ({ name, description, image }) => {
+const RecipeCard = ({ id, name, description, image }) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -64,6 +66,8 @@ const RecipeCard = ({ name, description, image }) => {
           size="large"
           color="primary"
           variant="contained"
+          to={`/recipes/${id}`}
+          component={Link}
         >
           Get Recipe
         </Button>

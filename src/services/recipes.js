@@ -5,4 +5,8 @@ const getPage = async page => {
   return await axios.get(`${baseUrl}?_page=${page}`);
 };
 
-export default { getPage };
+const getById = async id => {
+  return await axios.get(`${baseUrl}/${id}`);
+};
+
+export default { getPage, getById };
