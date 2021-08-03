@@ -5,6 +5,7 @@ import PaginationControlled from 'components/PaginationControlled';
 import RecipeCard from 'components/RecipeCard';
 import Grid from '@material-ui/core/Grid';
 import Layout from 'components/Layout';
+import RecipeDetails from 'components/RecipeDetails';
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);

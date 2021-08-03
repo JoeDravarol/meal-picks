@@ -7,9 +7,13 @@ const theme = createTheme({
     common: {
       black: '#333',
     },
+    primary: {
+      main: '#f6412f',
+    },
   },
   typography: {
     fontFamily: '"Bitter", "Times New Roman", "Times", serif',
+    fontFamilyHeader: '"Dosis", "Helvetica", "Arial", sans-serif',
     h1: {
       fontFamily: '"Dosis", "Helvetica", "Arial", sans-serif',
       fontWeight: 700,
