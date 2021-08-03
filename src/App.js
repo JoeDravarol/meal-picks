@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import recipeService from 'services/recipes';
 import { totalPageCount } from 'utils/pagination';
 import PaginationControlled from 'components/PaginationControlled';
+import RecipeCard from 'components/RecipeCard';
+import Grid from '@material-ui/core/Grid';
+import Layout from 'components/Layout';
 
 const App = () => {
   const [recipes, setRecipes] = useState([]);
@@ -20,14 +23,19 @@ const App = () => {
   };
 
   return (
-    <div>
-      MealPicks
-      <pre>{JSON.stringify(recipes, null, 2)}</pre>
+    <Layout>
+      <Grid container justifyContent="center" spacing={3}>
+        {recipes.map(recipe => (
+          <Grid item key={recipe.id}>
+            <RecipeCard {...recipe} />
+          </Grid>
+        ))}
+      </Grid>
       <PaginationControlled
         totalPage={totalPage}
         handlePagination={paginateTo}
       />
-    </div>
+    </Layout>
   );
 };
 
