@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRouteMatch, Route, Switch } from 'react-router-dom';
+import { useRouteMatch, Route, Switch, Redirect } from 'react-router-dom';
 
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -27,6 +27,7 @@ const DashboardPage = () => {
       <Switch>
         <Route path={`${path}/meals`}>Meal Plan</Route>
         <Route path={`${path}/favorites`}>My favorites</Route>
+        <Redirect from="*" to={`${path}/meals`} />
       </Switch>
     </DashboardAppDrawerBar>
   );

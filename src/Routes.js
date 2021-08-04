@@ -4,13 +4,24 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import RecipeListPage from 'pages/RecipeListPage';
 import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
+import Layout from 'components/Layout';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={RecipeListPage} />
+      <Route exact path="/">
+        <Layout>
+          <RecipeListPage />
+        </Layout>
+      </Route>
+
+      <Route path="/recipes/:id">
+        <Layout>
+          <RecipeDetailsPage />
+        </Layout>
+      </Route>
+
       <Route path="/dashboard" component={DashboardPage} />
-      <Route path="/recipes/:id" component={RecipeDetailsPage} />
       <Redirect from="*" to="/" />
     </Switch>
   );

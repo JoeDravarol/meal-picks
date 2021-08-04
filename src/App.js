@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Layout from 'components/Layout';
+import MuiTheme from 'components/MuiTheme';
 import Content from './Routes';
 
 const App = () => {
   return (
-    <Layout>
+    <MuiTheme>
       <Content />
-    </Layout>
+    </MuiTheme>
   );
 };
 
