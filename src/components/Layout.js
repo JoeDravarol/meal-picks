@@ -3,12 +3,20 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createTheme({
+  mixins: {
+    toolbar: {
+      minHeight: 82,
+    },
+  },
   palette: {
     common: {
       black: '#333',
     },
     primary: {
       main: '#f6412f',
+    },
+    secondary: {
+      main: '#faeec8',
     },
   },
   typography: {

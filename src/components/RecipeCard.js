@@ -15,7 +15,7 @@ import { truncateString } from 'utils/truncateString';
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 450,
-    backgroundColor: '#faeec8',
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: 0,
   },
   media: {
