@@ -93,12 +93,7 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
   const logo = (
     <div className={classes.toolbar}>
       <List>
-        <ListItem
-          alignItemsFlexStart
-          className={classes.logo}
-          component={Link}
-          to="/"
-        >
+        <ListItem className={classes.logo} component={Link} to="/">
           <ListItemIcon>
             <img src={logoImg} alt="logo" />
           </ListItemIcon>
