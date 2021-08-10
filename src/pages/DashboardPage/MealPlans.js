@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DashboardMealsPlan = ({ recipes, date, removeFromMealPlan }) => {
+const MealPlans = ({ recipes, date, removeFromMealPlan }) => {
   const classes = useStyles();
 
   const emptyState = (
@@ -59,4 +59,4 @@ const DashboardMealsPlan = ({ recipes, date, removeFromMealPlan }) => {
   );
 };
 
-export default DashboardMealsPlan;
+export default MealPlans;

@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DashboardDates = ({ selectedDate, setSelectedDate }) => {
+const Dates = ({ selectedDate, setSelectedDate }) => {
   const classes = useStyles();
 
   const firstDayOfWeek = startOfISOWeek(new Date());
@@ -57,4 +57,4 @@ const DashboardDates = ({ selectedDate, setSelectedDate }) => {
   );
 };
 
-export default DashboardDates;
+export default Dates;

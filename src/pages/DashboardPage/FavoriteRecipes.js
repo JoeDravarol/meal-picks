@@ -14,10 +14,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DashboardFavoriteRecipes = ({ recipes, addToMealPlan }) => {
+const FavoriteRecipes = ({ recipes, addToMealPlan }) => {
   const classes = useStyles();
 
-  const emptyList = <Typography>You have no favorite recipes...</Typography>;
+  const emptyList = (
+    <Grid item>
+      <Typography>You have no favorite recipes...</Typography>
+    </Grid>
+  );
 
   const recipesList = recipes.map(recipe => (
     <Grid item key={recipe.id}>
@@ -41,4 +45,4 @@ const DashboardFavoriteRecipes = ({ recipes, addToMealPlan }) => {
   );
 };
 
-export default DashboardFavoriteRecipes;
+export default FavoriteRecipes;
