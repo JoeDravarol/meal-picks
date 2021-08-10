@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 import { truncateString } from 'utils/truncateString';
 
@@ -23,16 +24,34 @@ const useStyles = makeStyles(theme => ({
       display: 'flex',
     },
   },
+  miniMedia: {
+    height: 100,
+
+    [theme.breakpoints.up('md')]: {
+      width: 100,
+    },
+  },
   media: {
     height: 150,
     margin: '0 auto',
     objectFit: 'cover',
 
     [theme.breakpoints.up('md')]: {
-      width: 150,
       borderRadius: 15,
       margin: 0,
     },
+  },
+  miniContent: {
+    padding: theme.spacing(2),
+    paddingBottom: 0,
+
+    [theme.breakpoints.up('md')]: {
+      marginLeft: theme.spacing(2),
+      padding: 0,
+    },
+  },
+  miniHeading: {
+    fontWeight: 600,
   },
   content: {
     padding: theme.spacing(3),
@@ -46,6 +65,7 @@ const useStyles = makeStyles(theme => ({
   },
   actions: {
     paddingTop: 0,
+    marginLeft: 'auto',
 
     [theme.breakpoints.up('md')]: {
       padding: 0,
@@ -61,8 +81,43 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DashboardRecipeCard = ({ recipe, handleClick }) => {
+const DashboardRecipeCard = ({ recipe, handleClick, miniVariant }) => {
   const classes = useStyles();
+
+  const miniCard = (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.miniMedia}
+        image={recipe.image}
+        title={recipe.name}
+        component="img"
+      />
+
+      <CardContent className={classes.miniContent}>
+        <Typography
+          className={classes.miniHeading}
+          variant="h6"
+          component="h3"
+          gutterBottom
+        >
+          {recipe.name}
+        </Typography>
+      </CardContent>
+
+      <CardActions className={classes.actions}>
+        <IconButton
+          className={classes.iconButton}
+          aria-label="remove meal from meal plan"
+          onClick={handleClick}
+        >
+          <CancelIcon fontSize="inherit" />
+        </IconButton>
+      </CardActions>
+    </Card>
+  );
+
+  if (miniVariant) return miniCard;
+
   return (
     <Card className={classes.root}>
       <CardMedia

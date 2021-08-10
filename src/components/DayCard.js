@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
   card: {
     display: 'grid',
     justifyItems: 'center',
+    minWidth: 90,
     maxWidth: 90,
     borderRadius: 25,
     textAlign: 'center',
@@ -43,7 +44,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const DayCard = ({ date, handleClick, selected }) => {
+const DayCard = ({ date, selected, setSelectedDate }) => {
   const classes = useStyles(selected);
 
   const todayDate = new Date();
@@ -57,6 +58,10 @@ const DayCard = ({ date, handleClick, selected }) => {
   ) : (
     <AddCircleIcon />
   );
+
+  const handleClick = () => {
+    setSelectedDate(date);
+  };
 
   return (
     <Card className={classes.card}>
