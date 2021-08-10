@@ -39,26 +39,33 @@ const DashboardMealPlan = () => {
       isSameDay(plan.date, selectedDate)
     );
 
-    if (existingMealPlan) {
-      const updatedMealPlan = mealPlan.map(plan => {
-        if (isSameDay(plan.date, selectedDate)) {
-          return {
-            date: existingMealPlan.date,
-            meals: [...existingMealPlan.meals, recipe],
-          };
-        }
-        return plan;
-      });
+    if (!existingMealPlan) {
+      const newMealPlan = {
+        date: selectedDate,
+        meals: [recipe],
+      };
 
-      return setMealPlan(updatedMealPlan);
+      return setMealPlan([...mealPlan, newMealPlan]);
     }
 
-    const newMealPlan = {
-      date: selectedDate,
-      meals: [recipe],
-    };
+    // Prevent adding duplicate meal/recipe
+    const mealPlanContainRecipe = existingMealPlan.meals.find(
+      meal => meal.name === recipe.name
+    );
 
-    setMealPlan([...mealPlan, newMealPlan]);
+    if (mealPlanContainRecipe) return;
+
+    const updatedMealPlan = mealPlan.map(plan => {
+      if (isSameDay(plan.date, selectedDate)) {
+        return {
+          date: existingMealPlan.date,
+          meals: [...existingMealPlan.meals, recipe],
+        };
+      }
+      return plan;
+    });
+
+    return setMealPlan(updatedMealPlan);
   };
 
   const removeFromMealPlan = recipe => {
