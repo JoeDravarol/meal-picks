@@ -1,12 +1,19 @@
 import axios from 'axios';
-const baseUrl = '/recipes';
+
+const baseUrl = '/api/recipes';
 
 const getPage = async page => {
-  return await axios.get(`${baseUrl}?_page=${page}`);
+  const response = await axios.get(baseUrl, {
+    params: {
+      page,
+    },
+  });
+  return response.data;
 };
 
 const getById = async id => {
-  return await axios.get(`${baseUrl}/${id}`);
+  const response = await axios.get(`${baseUrl}/${id}`);
+  return response.data;
 };
 
 export default { getPage, getById };

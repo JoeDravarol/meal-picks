@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 import recipeService from 'services/recipes';
-import { totalPageCount } from 'utils/pagination';
 import PaginationControlled from 'components/PaginationControlled';
 import RecipeCard from 'components/RecipeCard';
 
@@ -13,15 +12,16 @@ const RecipeListPage = () => {
   const [totalPage, setTotalPage] = useState();
 
   useEffect(() => {
-    recipeService.getPage(1).then(response => {
-      setTotalPage(totalPageCount(response.headers.link));
-      return setRecipes(response.data);
+    recipeService.getPage(1).then(data => {
+      setTotalPage(data.totalPage);
+      return setRecipes(data.results);
     });
   }, []);
 
   const paginateTo = async page => {
-    const response = await recipeService.getPage(page);
-    setRecipes(response.data);
+    const data = await recipeService.getPage(page);
+    console.log(page);
+    setRecipes(data.results);
   };
 
   return (

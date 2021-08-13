@@ -15,8 +15,8 @@ const RecipeDetailsPage = () => {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    recipeService.getById(id).then(response => {
-      setRecipe(response.data);
+    recipeService.getById(id).then(recipe => {
+      setRecipe(recipe);
     });
   }, [id]);
 
