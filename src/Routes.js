@@ -4,7 +4,9 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import RecipeListPage from 'pages/RecipeListPage';
 import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
+import LoginForm from 'components/LoginForm';
 import Layout from 'components/Layout';
+import AuthRoute from 'components/AuthRoute';
 
 const Routes = () => {
   return (
@@ -21,7 +23,13 @@ const Routes = () => {
         </Layout>
       </Route>
 
-      <Route path="/dashboard" component={DashboardPage} />
+      <AuthRoute path="/dashboard" component={DashboardPage} />
+
+      <Route path="/login">
+        <Layout>
+          <LoginForm />
+        </Layout>
+      </Route>
       <Redirect from="*" to="/" />
     </Switch>
   );
