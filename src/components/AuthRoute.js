@@ -7,7 +7,7 @@ const AuthRoute = ({ component, children, ...rest }) => {
   const auth = useAuth();
 
   if (!auth.isAuthenticated()) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   return (

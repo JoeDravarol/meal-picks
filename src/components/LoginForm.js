@@ -1,5 +1,6 @@
 import React from 'react';
 import { GithubLoginButton } from 'react-social-login-buttons';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -29,15 +30,17 @@ const buttonStyle = {
 
 const LoginForm = () => {
   const classes = useStyles();
+  const history = useHistory();
   const auth = useAuth();
+
+  const handleClick = () => {
+    auth.signInWithGithub().then(() => history.replace('/dashboard'));
+  };
 
   return (
     <Container className={classes.root} maxWidth="sm">
       <Box component={Paper} p={4} maxWidth={400} mx="auto">
-        <GithubLoginButton
-          style={buttonStyle}
-          onClick={() => auth.signInWithGithub()}
-        />
+        <GithubLoginButton style={buttonStyle} onClick={handleClick} />
       </Box>
     </Container>
   );
