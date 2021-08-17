@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import firebase from 'services/firebase';
 
+import userService from 'services/users';
+
 const authContext = createContext();
 
 export const useAuth = () => {
@@ -26,7 +28,8 @@ const useProvideAuth = () => {
     if (rawUser) {
       const user = formatUser(rawUser);
 
-      console.log(user);
+      // Create user in MongoDB
+      userService.create(user);
 
       setLoading(false);
       setUser(user);
