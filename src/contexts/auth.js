@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import firebase from 'services/firebase';
 
 import userService from 'services/users';
+import recipeService from 'services/recipes';
 
 const authContext = createContext();
 
@@ -24,12 +25,15 @@ const useProvideAuth = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleUser = rawUser => {
+  const handleUser = async rawUser => {
     if (rawUser) {
-      const user = formatUser(rawUser);
+      const { token, ...userWithoutToken } = await formatUser(rawUser);
+
+      // For Authorization Purpose
+      recipeService.setToken(token);
 
       // Create user in MongoDB
-      userService.create(user);
+      userService.create(userWithoutToken);
 
       setLoading(false);
       setUser(user);
@@ -72,12 +76,15 @@ const useProvideAuth = () => {
   };
 };
 
-const formatUser = user => {
+const formatUser = async user => {
+  const token = await user.getIdToken();
+
   return {
     uid: user.uid,
     email: user.email,
     name: user.displayName,
     provider: user.providerData[0].providerId,
     photoUrl: user.photoURL,
+    token,
   };
 };

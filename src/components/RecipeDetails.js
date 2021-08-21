@@ -12,6 +12,8 @@ import Container from '@material-ui/core/Container';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
+import recipeService from 'services/recipes';
+
 const useStyles = makeStyles(theme => ({
   recipeTitleSidebar: {
     borderColor: theme.palette.primary.main,
@@ -96,8 +98,24 @@ const RecipeDetails = ({ data }) => {
   const classes = useStyles();
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavorite = () => {
-    setIsFavorite(prevState => !prevState);
+  const handleFavorite = async () => {
+    try {
+      await recipeService.addFavorite(data.id);
+
+      setIsFavorite(true);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  const handleUnfavorite = async () => {
+    try {
+      await recipeService.removeFavorite(data.id);
+
+      setIsFavorite(false);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
@@ -114,7 +132,7 @@ const RecipeDetails = ({ data }) => {
           <Button
             className={classes.button}
             variant="outlined"
-            onClick={handleFavorite}
+            onClick={isFavorite ? handleUnfavorite : handleFavorite}
             startIcon={
               isFavorite ? <Favorite color="primary" /> : <FavoriteBorderIcon />
             }
