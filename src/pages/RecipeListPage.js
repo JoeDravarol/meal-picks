@@ -20,7 +20,6 @@ const RecipeListPage = () => {
 
   const paginateTo = async page => {
     const data = await recipeService.getPage(page);
-    console.log(page);
     setRecipes(data.results);
   };
 

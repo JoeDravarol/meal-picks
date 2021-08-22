@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const baseUrl = '/api/recipes';
+const favoriteRecipesUrl = '/api/favoriteRecipes';
 let token = null;
 
 const setToken = newToken => {
@@ -29,9 +30,15 @@ const getById = async id => {
   return response.data;
 };
 
+const getAllFavorite = async () => {
+  const response = await axios.get(favoriteRecipesUrl, getConfig());
+
+  return response.data;
+};
+
 const addFavorite = async id => {
   const response = await axios.post(
-    `${baseUrl}/${id}/favoriteRecipe`,
+    `${favoriteRecipesUrl}/${id}`,
     {},
     getConfig()
   );
@@ -41,10 +48,17 @@ const addFavorite = async id => {
 
 const removeFavorite = async id => {
   const response = await axios.delete(
-    `${baseUrl}/${id}/favoriteRecipe`,
+    `${favoriteRecipesUrl}/${id}`,
     getConfig()
   );
 
   return response.data;
 };
-export default { getPage, getById, addFavorite, removeFavorite, setToken };
+export default {
+  getPage,
+  getById,
+  getAllFavorite,
+  addFavorite,
+  removeFavorite,
+  setToken,
+};

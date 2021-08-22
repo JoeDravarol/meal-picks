@@ -34,9 +34,10 @@ const useProvideAuth = () => {
 
       // Create user in MongoDB
       userService.create(userWithoutToken);
+      const mongoDBUser = await userService.get(userWithoutToken.uid);
 
       setLoading(false);
-      setUser(user);
+      setUser(mongoDBUser);
 
       return user;
     } else {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -96,7 +97,13 @@ const useStyles = makeStyles(theme => ({
 
 const RecipeDetails = ({ data }) => {
   const classes = useStyles();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const favorited = useSelector(state => state.favoriteRecipes.find(r => r.id));
+  const [isFavorite, setIsFavorite] = useState(!!favorited);
+
+  // To avoid stale props
+  useEffect(() => {
+    setIsFavorite(!!favorited);
+  }, [favorited]);
 
   const handleFavorite = async () => {
     try {
