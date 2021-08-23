@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MealPlan = () => {
+const MealPlanView = () => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [mealPlan, setMealPlan] = useState([]);
@@ -120,4 +120,4 @@ const MealPlan = () => {
   );
 };
 
-export default MealPlan;
+export default MealPlanView;

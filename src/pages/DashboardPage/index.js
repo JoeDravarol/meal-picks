@@ -5,7 +5,8 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import DashboardAppDrawerBar from 'components/DashboardAppDrawerBar';
-import MealPlan from 'pages/DashboardPage/MealPlan';
+import MealPlanView from 'pages/DashboardPage/MealPlanView';
+import FavoriteRecipeListView from './FavoriteRecipeListView';
 
 const dashboardRoutes = [
   {
@@ -27,9 +28,11 @@ const DashboardPage = () => {
     <DashboardAppDrawerBar dashboardRoutes={dashboardRoutes}>
       <Switch>
         <Route path={`${path}/meals`}>
-          <MealPlan />
+          <MealPlanView />
         </Route>
-        <Route path={`${path}/favorites`}>My favorites</Route>
+        <Route path={`${path}/favorites`}>
+          <FavoriteRecipeListView />
+        </Route>
         <Redirect from="*" to={`${path}/meals`} />
       </Switch>
     </DashboardAppDrawerBar>

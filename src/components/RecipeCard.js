@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 import { truncateString } from 'utils/truncateString';
+import { removeFavRecipe } from 'reducers/favoriteRecipeReducer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,8 +29,9 @@ const useStyles = makeStyles(theme => ({
     minHeight: 220, // Keep card height consistent
   },
   actions: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2.5),
     paddingTop: 0,
+    justifyContent: 'space-between',
   },
   button: {
     backgroundColor: theme.palette.common.black,
@@ -38,8 +41,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RecipeCard = ({ id, name, description, image }) => {
+const RecipeCard = ({ id, name, description, image, isDashboard }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleUnfavorite = () => {
+    try {
+      dispatch(removeFavRecipe(id));
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -71,6 +84,18 @@ const RecipeCard = ({ id, name, description, image }) => {
         >
           Get Recipe
         </Button>
+
+        {isDashboard && (
+          <Button
+            className={classes.button}
+            size="large"
+            color="primary"
+            variant="contained"
+            onClick={handleUnfavorite}
+          >
+            Unfavorite
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
