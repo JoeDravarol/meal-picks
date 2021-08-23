@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
+import { useSelector } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 
@@ -29,6 +30,7 @@ const MealPlan = () => {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [mealPlan, setMealPlan] = useState([]);
+  const favoriteRecipes = useSelector(state => state.favoriteRecipes);
 
   const getSelectedMealPlan = () => {
     return mealPlan.find(plan => isSameDay(plan.date, selectedDate));
@@ -104,7 +106,10 @@ const MealPlan = () => {
 
       <GroceryList ingredients={getIngredients()} />
 
-      <FavoriteRecipes recipes={[]} addToMealPlan={addToMealPlan} />
+      <FavoriteRecipes
+        recipes={favoriteRecipes}
+        addToMealPlan={addToMealPlan}
+      />
 
       <MealPlans
         recipes={getSelectedMealPlan()?.meals || []}

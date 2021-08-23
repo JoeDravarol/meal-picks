@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -13,7 +13,7 @@ import Container from '@material-ui/core/Container';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import recipeService from 'services/recipes';
+import { addFavRecipe, removeFavRecipe } from 'reducers/favoriteRecipeReducer';
 
 const useStyles = makeStyles(theme => ({
   recipeTitleSidebar: {
@@ -97,7 +97,10 @@ const useStyles = makeStyles(theme => ({
 
 const RecipeDetails = ({ data }) => {
   const classes = useStyles();
-  const favorited = useSelector(state => state.favoriteRecipes.find(r => r.id));
+  const dispatch = useDispatch();
+  const favorited = useSelector(state =>
+    state.favoriteRecipes.find(r => r.id === data.id)
+  );
   const [isFavorite, setIsFavorite] = useState(!!favorited);
 
   // To avoid stale props
@@ -107,7 +110,7 @@ const RecipeDetails = ({ data }) => {
 
   const handleFavorite = async () => {
     try {
-      await recipeService.addFavorite(data.id);
+      dispatch(addFavRecipe(data.id));
 
       setIsFavorite(true);
     } catch (error) {
@@ -117,7 +120,7 @@ const RecipeDetails = ({ data }) => {
 
   const handleUnfavorite = async () => {
     try {
-      await recipeService.removeFavorite(data.id);
+      dispatch(removeFavRecipe(data.id));
 
       setIsFavorite(false);
     } catch (error) {
