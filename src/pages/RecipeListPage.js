@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import recipeService from 'services/recipes';
 import PaginationControlled from 'components/PaginationControlled';
 import RecipeCard from 'components/RecipeCard';
+import Loader from 'components/Loader';
 
 const RecipeListPage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -14,9 +15,11 @@ const RecipeListPage = () => {
   useEffect(() => {
     recipeService.getPage(1).then(data => {
       setTotalPage(data.totalPage);
-      return setRecipes(data.results);
+      setRecipes(data.results);
     });
   }, []);
+
+  if (recipes.length === 0) return <Loader />;
 
   const paginateTo = async page => {
     const data = await recipeService.getPage(page);

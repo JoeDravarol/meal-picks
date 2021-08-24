@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 import recipeService from 'services/recipes';
 import RecipeDetails from 'components/RecipeDetails';
-
-const spinnerStyles = {
-  display: 'grid',
-  margin: '2rem auto',
-};
+import Loader from 'components/Loader';
 
 const RecipeDetailsPage = () => {
   const { id } = useParams();
@@ -20,7 +15,7 @@ const RecipeDetailsPage = () => {
     });
   }, [id]);
 
-  if (!recipe) return <CircularProgress size={100} style={spinnerStyles} />;
+  if (!recipe) return <Loader />;
 
   return <RecipeDetails data={recipe} />;
 };
