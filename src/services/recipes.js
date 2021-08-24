@@ -38,8 +38,8 @@ const getAllFavorite = async () => {
 
 const addFavorite = async id => {
   const response = await axios.post(
-    `${favoriteRecipesUrl}/${id}`,
-    {},
+    `${favoriteRecipesUrl}`,
+    { recipeId: id },
     getConfig()
   );
 
