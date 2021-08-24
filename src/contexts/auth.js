@@ -36,8 +36,10 @@ const useProvideAuth = () => {
       userService.create(userWithoutToken);
       const mongoDBUser = await userService.get(userWithoutToken.uid);
 
-      setLoading(false);
+      // SetLoading should always be the last operation
+      // If not the auth route will render login form
       setUser(mongoDBUser);
+      setLoading(false);
 
       return user;
     } else {
