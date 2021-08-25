@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import firebase from 'services/firebase';
 
 import userService from 'services/users';
-import recipeService from 'services/recipes';
+import tokenStorage from 'utils/tokenStorage';
 
 const authContext = createContext();
 
@@ -30,7 +30,7 @@ const useProvideAuth = () => {
       const { token, ...userWithoutToken } = await formatUser(rawUser);
 
       // For Authorization Purpose
-      recipeService.setToken(token);
+      tokenStorage.setToken(token);
 
       // Create user in MongoDB
       userService.create(userWithoutToken);
