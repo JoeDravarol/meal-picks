@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
-import { useSelector } from 'react-redux';
+import parseISO from 'date-fns/parseISO';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 
@@ -9,6 +10,11 @@ import FavoriteRecipes from 'pages/DashboardPage/FavoriteRecipes';
 import MealPlans from 'pages/DashboardPage/MealPlans';
 import Dates from 'pages/DashboardPage/Dates';
 import GroceryList from 'components/GroceryList';
+import {
+  initializeMealPlans,
+  createMealPlan,
+  updateMealPlan,
+} from 'reducers/mealPlanReducer';
 
 const useStyles = makeStyles(theme => ({
   grid: {
@@ -28,74 +34,86 @@ const useStyles = makeStyles(theme => ({
 
 const MealPlanView = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const mealPlan = useSelector(state => state.mealPlans);
+  const [existingMealPlan, setExistingMealPlan] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [mealPlan, setMealPlan] = useState([]);
   const favoriteRecipes = useSelector(state => state.favoriteRecipes);
 
-  const getSelectedMealPlan = () => {
-    return mealPlan.find(plan => isSameDay(plan.date, selectedDate));
-  };
+  useEffect(() => {
+    dispatch(initializeMealPlans());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setExistingMealPlan(
+      mealPlan.find(plan => isSameDay(parseISO(plan.date), selectedDate))
+    );
+  }, [selectedDate, mealPlan]);
 
   const addToMealPlan = recipe => {
-    const existingMealPlan = mealPlan.find(plan =>
-      isSameDay(plan.date, selectedDate)
-    );
-
+    // Create new meal plan
     if (!existingMealPlan) {
       const newMealPlan = {
         date: selectedDate,
-        meals: [recipe],
+        recipes: [recipe.id],
+        recipeId: recipe.id,
       };
 
-      return setMealPlan([...mealPlan, newMealPlan]);
+      console.log(recipe.id);
+      console.log(newMealPlan.recipes);
+
+      dispatch(createMealPlan(newMealPlan)).catch(error =>
+        console.error(error.response.data.error)
+      );
+      return;
     }
 
     // Prevent adding duplicate meal/recipe
-    const mealPlanContainRecipe = existingMealPlan.meals.find(
-      meal => meal.name === recipe.name
+    const mealPlanContainRecipe = existingMealPlan.recipes.find(
+      r => r.id === recipe.id
     );
 
     if (mealPlanContainRecipe) return;
 
-    const updatedMealPlan = mealPlan.map(plan => {
-      if (isSameDay(plan.date, selectedDate)) {
-        return {
-          date: existingMealPlan.date,
-          meals: [...existingMealPlan.meals, recipe],
-        };
-      }
-      return plan;
-    });
+    // Update existing meal plan
+    const recipesId = existingMealPlan.recipes.map(recipe => recipe.id);
+    const newMealPlan = {
+      ...existingMealPlan,
+      recipes: [...recipesId, recipe.id],
+    };
 
-    return setMealPlan(updatedMealPlan);
+    dispatch(updateMealPlan(existingMealPlan.id, newMealPlan)).catch(error =>
+      console.error(error.response.data.error)
+    );
   };
 
-  const removeFromMealPlan = recipe => {
-    const mealPlanToChange = mealPlan.find(plan =>
-      isSameDay(plan.date, selectedDate)
-    );
-    const updatedMeals = mealPlanToChange.meals.filter(
-      meal => meal.name !== recipe.name
-    );
-    const updatedMealPlan = mealPlan.map(plan =>
-      plan.date !== mealPlanToChange.date
-        ? plan
-        : { date: mealPlanToChange.date, meals: updatedMeals }
-    );
+  const removeFromMealPlan = async recipe => {
+    const recipesId = existingMealPlan.recipes.map(recipe => recipe.id);
 
-    setMealPlan(updatedMealPlan);
+    const newRecipesId = recipesId.filter(id => id !== recipe.id);
+    const newMealPlan = {
+      ...existingMealPlan,
+      recipes: newRecipesId,
+    };
+
+    dispatch(updateMealPlan(existingMealPlan.id, newMealPlan)).catch(error =>
+      console.error(error.response.data.error)
+    );
   };
 
   const getIngredients = () => {
     const selectedMealPlan = mealPlan.find(plan =>
-      isSameDay(plan.date, selectedDate)
+      isSameDay(parseISO(plan.date), selectedDate)
     );
 
     if (!selectedMealPlan) return [];
 
-    const ingredients = selectedMealPlan.meals.reduce((ingredients, plan) => {
-      return ingredients.concat(plan.ingredients);
-    }, []);
+    const ingredients = selectedMealPlan.recipes.reduce(
+      (ingredients, recipe) => {
+        return ingredients.concat(recipe.ingredients);
+      },
+      []
+    );
 
     return ingredients;
   };
@@ -112,7 +130,7 @@ const MealPlanView = () => {
       />
 
       <MealPlans
-        recipes={getSelectedMealPlan()?.meals || []}
+        recipes={existingMealPlan?.recipes || []}
         date={format(selectedDate, 'dd, LLLL yyy')}
         removeFromMealPlan={removeFromMealPlan}
       />
