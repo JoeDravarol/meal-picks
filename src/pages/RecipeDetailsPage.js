@@ -45,7 +45,9 @@ const RecipeDetailsPage = () => {
         aria-labelledby="login form modal"
         aria-describedby="a modal for user to login to the website"
       >
-        <LoginForm />
+        <div>
+          <LoginForm />
+        </div>
       </Modal>
       <RecipeDetails
         data={recipe}
