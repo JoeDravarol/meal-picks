@@ -46,11 +46,9 @@ const RecipeCard = ({ id, name, description, image, isDashboard }) => {
   const dispatch = useDispatch();
 
   const handleUnfavorite = () => {
-    try {
-      dispatch(removeFavRecipe(id));
-    } catch (error) {
-      console.error(error.message);
-    }
+    dispatch(removeFavRecipe(id)).catch(error =>
+      console.error(error.response.data.error)
+    );
   };
 
   return (

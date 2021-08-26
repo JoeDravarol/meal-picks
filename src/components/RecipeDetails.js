@@ -114,7 +114,7 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
 
       setIsFavorite(true);
     } catch (error) {
-      console.error(error.message);
+      console.error(error.response.data.error);
     }
   };
 
@@ -124,7 +124,7 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
 
       setIsFavorite(false);
     } catch (error) {
-      console.error(error.message);
+      console.error(error.response.data.error);
     }
   };
 

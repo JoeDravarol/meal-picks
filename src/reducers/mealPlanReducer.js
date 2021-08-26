@@ -12,6 +12,8 @@ const reducer = (state = [], action) => {
         mealPlan.id !== id ? mealPlan : data
       );
       return updatedMealPlans;
+    case 'RESET_MEAL_PLANS':
+      return [];
     default:
       return state;
   }
@@ -53,6 +55,12 @@ export const updateMealPlan = (id, mealPlan) => {
         data: updatedMealPlan,
       },
     });
+  };
+};
+
+export const resetMealPlans = () => {
+  return dispatch => {
+    dispatch({ type: 'RESET_MEAL_PLANS' });
   };
 };
 

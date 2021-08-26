@@ -9,6 +9,8 @@ const reducer = (state = [], action) => {
     case 'REMOVE_FAV_RECIPE':
       const id = action.payload.id;
       return state.filter(recipe => recipe.id !== id);
+    case 'RESET_FAV_RECIPES':
+      return [];
     default:
       return state;
   }
@@ -43,6 +45,14 @@ export const removeFavRecipe = id => {
     dispatch({
       type: 'REMOVE_FAV_RECIPE',
       payload: { id },
+    });
+  };
+};
+
+export const resetFavRecipes = () => {
+  return dispatch => {
+    dispatch({
+      type: 'RESET_FAV_RECIPES',
     });
   };
 };

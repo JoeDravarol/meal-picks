@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
 import Divider from '@material-ui/core/Divider';
@@ -14,8 +15,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import logoImg from 'images/logo.png';
+import { useAuth } from 'contexts/auth';
+import { resetMealPlans } from 'reducers/mealPlanReducer';
+import { resetFavRecipes } from 'reducers/favoriteRecipeReducer';
 
 const drawerWidth = 240;
 
@@ -78,6 +83,8 @@ const useStyles = makeStyles(theme => ({
 const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const auth = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { url } = useRouteMatch();
@@ -88,6 +95,16 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+  };
+
+  const handleSignout = () => {
+    auth.signout();
+    try {
+      dispatch(resetMealPlans());
+      dispatch(resetFavRecipes());
+    } catch (error) {
+      console.error(error.response.data.error);
+    }
   };
 
   const logo = (
@@ -132,6 +149,16 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
             <ListItemText primary={text} />
           </ListItem>
         ))}
+        <ListItem
+          className={classes.drawerListItem}
+          onClick={handleSignout}
+          button
+        >
+          <ListItemIcon className={classes.drawerListIcon}>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign Out" />
+        </ListItem>
       </List>
     </nav>
   );

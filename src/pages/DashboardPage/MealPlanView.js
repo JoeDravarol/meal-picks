@@ -59,9 +59,6 @@ const MealPlanView = () => {
         recipeId: recipe.id,
       };
 
-      console.log(recipe.id);
-      console.log(newMealPlan.recipes);
-
       dispatch(createMealPlan(newMealPlan)).catch(error =>
         console.error(error.response.data.error)
       );
