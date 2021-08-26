@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RecipeDetails = ({ data }) => {
+const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const favorited = useSelector(state =>
@@ -108,7 +108,7 @@ const RecipeDetails = ({ data }) => {
     setIsFavorite(!!favorited);
   }, [favorited]);
 
-  const handleFavorite = async () => {
+  const favoriteRecipe = async () => {
     try {
       dispatch(addFavRecipe(data.id));
 
@@ -118,13 +118,23 @@ const RecipeDetails = ({ data }) => {
     }
   };
 
-  const handleUnfavorite = async () => {
+  const unfavoriteRecipe = async () => {
     try {
       dispatch(removeFavRecipe(data.id));
 
       setIsFavorite(false);
     } catch (error) {
       console.error(error.message);
+    }
+  };
+
+  const handleClick = () => {
+    if (!isAuth) return handleModalOpen();
+
+    if (isFavorite) {
+      unfavoriteRecipe();
+    } else {
+      favoriteRecipe();
     }
   };
 
@@ -142,7 +152,7 @@ const RecipeDetails = ({ data }) => {
           <Button
             className={classes.button}
             variant="outlined"
-            onClick={isFavorite ? handleUnfavorite : handleFavorite}
+            onClick={handleClick}
             startIcon={
               isFavorite ? <Favorite color="primary" /> : <FavoriteBorderIcon />
             }
