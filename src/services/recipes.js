@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { concatBaseUrl } from 'utils/apiUrl';
 
-const baseUrl = '/api/recipes';
+const baseUrl = concatBaseUrl('/api/recipes');
 
 const getPage = async page => {
   const response = await axios.get(baseUrl, {

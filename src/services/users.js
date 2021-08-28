@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { concatBaseUrl } from 'utils/apiUrl';
 
-const baseUrl = '/api/users';
+const baseUrl = concatBaseUrl('/api/users');
 
 const get = async uid => {
   const response = await axios.get(`${baseUrl}/${uid}`);

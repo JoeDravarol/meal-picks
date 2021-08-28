@@ -1,7 +1,8 @@
 import axios from 'axios';
 import tokenStorage from 'utils/tokenStorage';
+import { concatBaseUrl } from 'utils/apiUrl';
 
-const baseUrl = '/api/mealPlans';
+const baseUrl = concatBaseUrl('/api/mealPlans');
 
 const getAll = async () => {
   const response = await axios.get(baseUrl, tokenStorage.getConfig());
