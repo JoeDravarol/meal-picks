@@ -50,12 +50,21 @@ const useProvideAuth = () => {
     }
   };
 
-  const signInWithGithub = async () => {
+  const signInWithGithub = () => {
     setLoading(true);
 
     return firebase
       .auth()
       .signInWithPopup(new firebase.auth.GithubAuthProvider())
+      .then(response => handleUser(response.user));
+  };
+
+  const signInWithGoogle = () => {
+    setLoading(true);
+
+    return firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(response => handleUser(response.user));
   };
 
@@ -74,6 +83,7 @@ const useProvideAuth = () => {
     user,
     loading,
     signInWithGithub,
+    signInWithGoogle,
     signout,
     isAuthenticated,
   };

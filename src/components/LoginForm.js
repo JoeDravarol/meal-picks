@@ -1,5 +1,8 @@
 import React from 'react';
-import { GithubLoginButton } from 'react-social-login-buttons';
+import {
+  GithubLoginButton,
+  GoogleLoginButton,
+} from 'react-social-login-buttons';
 import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,13 +16,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     textAlign: 'center',
   },
-  logo: {
-    color: 'inherit',
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(3),
-    justifyContent: 'center',
+  box: {
+    display: 'grid',
+    gridGap: theme.spacing(1),
   },
 }));
 
@@ -31,16 +30,29 @@ const buttonStyle = {
 const LoginForm = () => {
   const classes = useStyles();
   const history = useHistory();
-  const auth = useAuth();
+  const { signInWithGithub, signInWithGoogle } = useAuth();
 
-  const handleClick = () => {
-    auth.signInWithGithub().then(() => history.replace('/dashboard'));
+  const handleSignIn = signInProvider => {
+    signInProvider().then(() => history.replace('/dashboard'));
   };
 
   return (
     <Container className={classes.root} maxWidth="sm">
-      <Box component={Paper} p={4} maxWidth={400} mx="auto">
-        <GithubLoginButton style={buttonStyle} onClick={handleClick} />
+      <Box
+        className={classes.box}
+        component={Paper}
+        p={4}
+        maxWidth={400}
+        mx="auto"
+      >
+        <GithubLoginButton
+          style={buttonStyle}
+          onClick={() => handleSignIn(signInWithGithub)}
+        />
+        <GoogleLoginButton
+          style={buttonStyle}
+          onClick={() => handleSignIn(signInWithGoogle)}
+        />
       </Box>
     </Container>
   );
