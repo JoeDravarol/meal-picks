@@ -6,9 +6,9 @@ import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
 import LoginForm from 'components/LoginForm';
 import Layout from 'components/Layout';
-import AuthRoute from 'components/AuthRoute';
+import AuthRoute from 'routes/AuthRoute';
 
-const Routes = () => {
+const AppRoutes = () => {
   return (
     <Switch>
       <Route exact path="/">
@@ -35,4 +35,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default AppRoutes;

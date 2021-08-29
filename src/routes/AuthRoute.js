@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { useAuth } from 'contexts/auth';
-import Loader from './Loader';
+import Loader from 'components/Loader';
 
 const AuthRoute = ({ component, children, ...rest }) => {
   const auth = useAuth();

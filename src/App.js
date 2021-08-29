@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import MuiTheme from 'components/MuiTheme';
-import Content from './Routes';
+import AppRoutes from 'routes/AppRoutes';
 import { useAuth } from 'contexts/auth';
 import { initializeFavRecipes } from 'reducers/favoriteRecipeReducer';
 
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <MuiTheme>
-      <Content />
+      <AppRoutes />
     </MuiTheme>
   );
 };
