@@ -23,7 +23,6 @@ export const initializeMealPlans = () => {
   return async dispatch => {
     const mealPlans = await mealPlanService.getAll();
 
-    console.log(mealPlans);
     dispatch({
       type: 'INIT_MEAL_PLANS',
       payload: mealPlans,
@@ -45,8 +44,6 @@ export const createMealPlan = mealPlan => {
 export const updateMealPlan = (id, mealPlan) => {
   return async dispatch => {
     const updatedMealPlan = await mealPlanService.update(id, mealPlan);
-
-    console.log(updatedMealPlan);
 
     dispatch({
       type: 'UPDATE_MEAL_PLAN',
