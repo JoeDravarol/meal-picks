@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Dates = ({ selectedDate, setSelectedDate }) => {
+const WeekDates = ({ selectedDate, setSelectedDate }) => {
   const classes = useStyles();
 
   const firstDayOfWeek = startOfISOWeek(new Date());
@@ -57,4 +57,4 @@ const Dates = ({ selectedDate, setSelectedDate }) => {
   );
 };
 
-export default Dates;
+export default WeekDates;

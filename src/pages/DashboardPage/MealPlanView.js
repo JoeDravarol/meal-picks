@@ -6,10 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 
-import FavoriteRecipes from 'pages/DashboardPage/FavoriteRecipes';
-import MealPlans from 'pages/DashboardPage/MealPlans';
-import Dates from 'pages/DashboardPage/Dates';
-import GroceryList from 'components/GroceryList';
+import FavoriteRecipes from 'components/sections/FavoriteRecipes';
+import MealPlans from 'components/sections/MealPlans';
+import WeekDates from 'components/WeekDates';
+import GroceryList from 'components/sections/GroceryList';
 import {
   initializeMealPlans,
   createMealPlan,
@@ -117,7 +117,10 @@ const MealPlanView = () => {
 
   return (
     <div className={classes.grid}>
-      <Dates selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      <WeekDates
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
 
       <GroceryList ingredients={getIngredients()} />
 
