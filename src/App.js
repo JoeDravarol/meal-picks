@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import MuiTheme from 'components/MuiTheme';
 import AppRoutes from 'routes/AppRoutes';
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'contexts/AuthContext';
 import { initializeFavRecipes } from 'reducers/favoriteRecipeReducer';
 
 const App = () => {
