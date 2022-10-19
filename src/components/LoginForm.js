@@ -1,59 +1,102 @@
 import React from 'react';
-import {
-  GithubLoginButton,
-  GoogleLoginButton,
-} from 'react-social-login-buttons';
-import { useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'contexts/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    textAlign: 'center',
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    background: 'white',
+    padding: theme.spacing(5),
   },
-  box: {
-    display: 'grid',
-    gridGap: theme.spacing(1),
+  avatar: {
+    margin: theme.spacing(1),
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  link: {
+    textAlign: 'right',
+    display: 'block',
   },
 }));
 
-const buttonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-};
-
 const LoginForm = () => {
   const classes = useStyles();
-  const history = useHistory();
-  const { signInWithGithub, signInWithGoogle } = useAuth();
+  const auth = useAuth();
 
-  const handleSignIn = signInProvider => {
-    signInProvider().then(() => history.replace('/dashboard'));
+  const onSubmit = e => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    auth.login(username, password);
   };
 
   return (
-    <Container className={classes.root} maxWidth="sm">
-      <Box
-        className={classes.box}
-        component={Paper}
-        p={4}
-        maxWidth={400}
-        mx="auto"
-      >
-        <GithubLoginButton
-          style={buttonStyle}
-          onClick={() => handleSignIn(signInWithGithub)}
+    <Container className={classes.root} maxWidth="xs">
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Sign in
+      </Typography>
+
+      <form className={classes.form} onSubmit={onSubmit}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="username"
+          label="Username"
+          name="username"
+          autoFocus
         />
-        <GoogleLoginButton
-          style={buttonStyle}
-          onClick={() => handleSignIn(signInWithGoogle)}
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
         />
-      </Box>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Sign In
+        </Button>
+        <Link
+          to="/signup"
+          className={classes.link}
+          variant="body2"
+          component={RouterLink}
+        >
+          {"Don't have an account? Sign Up"}
+        </Link>
+      </form>
     </Container>
   );
 };
