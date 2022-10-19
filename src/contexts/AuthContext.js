@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import loginService from 'services/login';
+import userService from 'services/users';
 import tokenStorage from 'utils/tokenStorage';
 import useLocalStorage from 'hooks/useLocalStorage';
 
@@ -12,6 +14,7 @@ const AuthProvider = ({ children }) => {
 };
 
 const useProvideAuth = () => {
+  const history = useHistory();
   const [user, setUser] = useLocalStorage('user', null);
   const [loading, setLoading] = useState(true);
 
@@ -56,6 +59,23 @@ const useProvideAuth = () => {
     handleUser(null);
   };
 
+  const signup = async newUser => {
+    try {
+      setLoading(true);
+
+      await userService.create({
+        username: newUser.username,
+        name: newUser.name,
+        password: newUser.password,
+        confirmPassword: newUser.confirmPassword,
+      });
+
+      history.replace('/login');
+    } catch (exception) {
+      console.error(exception.response.data.error);
+    }
+  };
+
   const isAuthenticated = () => {
     return !!user;
   };
@@ -65,6 +85,7 @@ const useProvideAuth = () => {
     loading,
     login,
     signout,
+    signup,
     isAuthenticated,
   };
 };

@@ -7,6 +7,7 @@ import DashboardPage from 'pages/DashboardPage';
 import Layout from 'components/Layout';
 import AuthRoute from 'routes/AuthRoute';
 import LoginPage from 'pages/LoginPage';
+import SignupForm from 'components/SignupForm';
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,12 @@ const AppRoutes = () => {
       <Route path="/login">
         <Layout>
           <LoginPage />
+        </Layout>
+      </Route>
+
+      <Route path="/signup">
+        <Layout>
+          <SignupForm />
         </Layout>
       </Route>
 
