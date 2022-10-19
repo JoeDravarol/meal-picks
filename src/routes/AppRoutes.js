@@ -6,8 +6,8 @@ import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
 import Layout from 'components/Layout';
 import AuthRoute from 'routes/AuthRoute';
-import LoginPage from 'pages/LoginPage';
 import SignupForm from 'components/SignupForm';
+import LoginForm from 'components/LoginForm';
 
 const AppRoutes = () => {
   return (
@@ -26,17 +26,17 @@ const AppRoutes = () => {
 
       <AuthRoute path="/dashboard" component={DashboardPage} />
 
-      <Route path="/login">
+      <AuthRoute path="/login" isAuthFlag redirectTo="/dashboard">
         <Layout>
-          <LoginPage />
+          <LoginForm />
         </Layout>
-      </Route>
+      </AuthRoute>
 
-      <Route path="/signup">
+      <AuthRoute path="/signup" isAuthFlag redirectTo="/dashboard">
         <Layout>
           <SignupForm />
         </Layout>
-      </Route>
+      </AuthRoute>
 
       <Redirect from="*" to="/" />
     </Switch>
