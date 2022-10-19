@@ -37,16 +37,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const LoginForm = () => {
+const SignupForm = () => {
   const classes = useStyles();
   const auth = useAuth();
 
   const onSubmit = e => {
     e.preventDefault();
     const username = e.target.username.value;
+    const name = e.target.name.value;
     const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
 
-    auth.login(username, password);
+    auth.signup({ username, name, password, confirmPassword });
   };
 
   return (
@@ -55,7 +57,7 @@ const LoginForm = () => {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Sign up
       </Typography>
 
       <form className={classes.form} onSubmit={onSubmit}>
@@ -74,10 +76,29 @@ const LoginForm = () => {
           margin="normal"
           required
           fullWidth
+          id="name"
+          label="Name"
+          name="name"
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
           name="password"
           label="Password"
           type="password"
           id="password"
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="confirmPassword"
+          label="Confirm password"
+          type="password"
+          id="confirmPassword"
         />
         <Button
           type="submit"
@@ -86,19 +107,19 @@ const LoginForm = () => {
           color="primary"
           className={classes.submit}
         >
-          Sign In
+          Sign Up
         </Button>
         <Link
-          to="/signup"
+          to="/login"
           className={classes.link}
           variant="body2"
           component={RouterLink}
         >
-          {"Don't have an account? Sign Up"}
+          Already have an account? Sign in
         </Link>
       </form>
     </Container>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

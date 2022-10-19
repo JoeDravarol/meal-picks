@@ -4,9 +4,10 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import RecipeListPage from 'pages/RecipeListPage';
 import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
-import LoginForm from 'components/LoginForm';
 import Layout from 'components/Layout';
 import AuthRoute from 'routes/AuthRoute';
+import SignupForm from 'components/SignupForm';
+import LoginForm from 'components/LoginForm';
 
 const AppRoutes = () => {
   return (
@@ -25,11 +26,18 @@ const AppRoutes = () => {
 
       <AuthRoute path="/dashboard" component={DashboardPage} />
 
-      <Route path="/login">
+      <AuthRoute path="/login" isAuthFlag redirectTo="/dashboard">
         <Layout>
           <LoginForm />
         </Layout>
-      </Route>
+      </AuthRoute>
+
+      <AuthRoute path="/signup" isAuthFlag redirectTo="/dashboard">
+        <Layout>
+          <SignupForm />
+        </Layout>
+      </AuthRoute>
+
       <Redirect from="*" to="/" />
     </Switch>
   );

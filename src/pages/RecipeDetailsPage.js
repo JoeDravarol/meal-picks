@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import recipeService from 'services/recipes';
 import RecipeDetails from 'components/RecipeDetails';
 import Loader from 'components/Loader';
-import { useAuth } from 'contexts/auth';
+import { useAuth } from 'contexts/AuthContext';
 import LoginForm from 'components/LoginForm';
 
 const modalStyles = {
