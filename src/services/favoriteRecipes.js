@@ -2,17 +2,17 @@ import axios from 'axios';
 import tokenStorage from 'utils/tokenStorage';
 import { concatBaseUrl } from 'utils/apiUrl';
 
-let baseUrl = concatBaseUrl('/api/favoriteRecipes');
+const BASE_URL = concatBaseUrl('/api/favoriteRecipes');
 
 const getAllFavorite = async () => {
-  const response = await axios.get(baseUrl, tokenStorage.getConfig());
+  const response = await axios.get(BASE_URL, tokenStorage.getConfig());
 
   return response.data;
 };
 
 const addFavorite = async id => {
   const response = await axios.post(
-    `${baseUrl}`,
+    `${BASE_URL}`,
     { recipeId: id },
     tokenStorage.getConfig()
   );
@@ -22,7 +22,7 @@ const addFavorite = async id => {
 
 const removeFavorite = async id => {
   const response = await axios.delete(
-    `${baseUrl}/${id}`,
+    `${BASE_URL}/${id}`,
     tokenStorage.getConfig()
   );
 

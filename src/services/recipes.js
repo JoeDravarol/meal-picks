@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { concatBaseUrl } from 'utils/apiUrl';
 
-const baseUrl = concatBaseUrl('/api/recipes');
+const BASE_URL = concatBaseUrl('/api/recipes');
 
 const getPage = async page => {
-  const response = await axios.get(baseUrl, {
+  const response = await axios.get(BASE_URL, {
     params: {
       page,
     },
@@ -14,7 +14,7 @@ const getPage = async page => {
 };
 
 const getById = async id => {
-  const response = await axios.get(`${baseUrl}/${id}`);
+  const response = await axios.get(`${BASE_URL}/${id}`);
 
   return response.data;
 };
