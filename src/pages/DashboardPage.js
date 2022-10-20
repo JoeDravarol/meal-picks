@@ -3,7 +3,7 @@ import React from 'react';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import DashboardAppDrawerBar from 'components/sections/DashboardAppDrawerBar';
+import DashboardAppDrawerBar from 'features/dashboard/DashboardAppDrawerBar';
 import DashboardRoutes from 'routes/DashboardRoutes';
 
 const dashboardRoutes = [

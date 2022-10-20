@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Grid from '@material-ui/core/Grid';
 
-import RecipeCard from 'components/RecipeCard';
+import RecipeCard from 'features/recipe/RecipeCard';
 
 const FavoriteRecipeListView = () => {
   const favoriteRecipes = useSelector(state => state.favoriteRecipes);

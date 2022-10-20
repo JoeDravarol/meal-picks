@@ -6,10 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core';
 
-import FavoriteRecipes from 'components/sections/FavoriteRecipes';
-import MealPlans from 'components/sections/MealPlans';
-import WeekDates from 'components/WeekDates';
-import GroceryList from 'components/sections/GroceryList';
+import FavoriteRecipes from 'features/dashboard/FavoriteRecipes';
+import MealPlans from 'features/dashboard/MealPlans';
+import WeekDates from 'features/dashboard/WeekDates';
+import GroceryList from 'features/dashboard/GroceryList';
 import {
   initializeMealPlans,
   createMealPlan,

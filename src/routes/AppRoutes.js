@@ -6,8 +6,8 @@ import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
 import Layout from 'components/Layout';
 import AuthRoute from 'routes/AuthRoute';
-import SignupForm from 'components/SignupForm';
-import LoginForm from 'components/LoginForm';
+import SignupForm from 'features/authentication/SignupForm';
+import LoginForm from 'features/authentication/LoginForm';
 
 const AppRoutes = () => {
   return (

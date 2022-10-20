@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
 
-import MealPlanView from 'pages/DashboardPage/MealPlanView';
-import FavoriteRecipeListView from 'pages/DashboardPage/FavoriteRecipeListView';
+import MealPlanView from 'features/dashboard/MealPlanView';
+import FavoriteRecipeListView from 'features/dashboard/FavoriteRecipeListView';
 
 const DashboardRoutes = () => {
   const { path } = useRouteMatch();

@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
 
 import recipeService from 'services/recipes';
-import RecipeDetails from 'components/RecipeDetails';
+import RecipeDetails from 'features/recipe/RecipeDetails';
 import Loader from 'components/Loader';
 import { useAuth } from 'contexts/AuthContext';
-import LoginForm from 'components/LoginForm';
+import LoginForm from 'features/authentication/LoginForm';
 
 const modalStyles = {
   display: 'grid',
