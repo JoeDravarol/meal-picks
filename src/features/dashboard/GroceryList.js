@@ -14,7 +14,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.common.main,
   },
   header: {
     padding: theme.spacing(2),
@@ -25,9 +25,9 @@ const useStyles = makeStyles(theme => ({
   },
   list: {
     padding: 0,
-    height: 400,
-    maxHeight: 800,
     overflow: 'auto',
+    minHeight: 400,
+    maxHeight: 'calc(80vh - 300px)',
     // For Firefox
     scrollbarColor: `${theme.palette.common.white} ${theme.palette.secondary.dark}`,
     scrollbarWidth: 'auto',

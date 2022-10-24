@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/core';
 import FavoriteRecipes from 'features/dashboard/FavoriteRecipes';
 import MealPlans from 'features/dashboard/MealPlans';
 import WeekDates from 'features/dashboard/WeekDates';
-import GroceryList from 'features/dashboard/GroceryList';
 import {
   initializeMealPlans,
   createMealPlan,
@@ -24,11 +23,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('lg')]: {
       gridTemplateColumns: '1fr .7fr',
     },
-  },
-  dates: {
-    display: 'flex',
-    gridGap: theme.spacing(3),
-    gridTemplateColumns: 'repeat(7, 1fr)',
   },
 }));
 
@@ -98,23 +92,6 @@ const MealPlanView = () => {
     );
   };
 
-  const getIngredients = () => {
-    const selectedMealPlan = mealPlan.find(plan =>
-      isSameDay(parseISO(plan.date), selectedDate)
-    );
-
-    if (!selectedMealPlan) return [];
-
-    const ingredients = selectedMealPlan.recipes.reduce(
-      (ingredients, recipe) => {
-        return ingredients.concat(recipe.ingredients);
-      },
-      []
-    );
-
-    return ingredients;
-  };
-
   return (
     <div className={classes.grid}>
       <WeekDates
@@ -122,17 +99,15 @@ const MealPlanView = () => {
         setSelectedDate={setSelectedDate}
       />
 
-      <GroceryList ingredients={getIngredients()} />
-
-      <FavoriteRecipes
-        recipes={favoriteRecipes}
-        addToMealPlan={addToMealPlan}
-      />
-
       <MealPlans
         recipes={existingMealPlan?.recipes || []}
         date={format(selectedDate, 'dd, LLLL yyy')}
         removeFromMealPlan={removeFromMealPlan}
+      />
+
+      <FavoriteRecipes
+        recipes={favoriteRecipes}
+        addToMealPlan={addToMealPlan}
       />
     </div>
   );
