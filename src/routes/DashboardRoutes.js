@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect, useRouteMatch } from 'react-router-dom';
 
 import MealPlanView from 'features/dashboard/MealPlanView';
+import MealToCookView from 'features/dashboard/MealToCookView';
 import FavoriteRecipeListView from 'features/dashboard/FavoriteRecipeListView';
 import GroceryListView from 'features/dashboard/GroceryListView';
 
@@ -10,6 +11,9 @@ const DashboardRoutes = () => {
 
   return (
     <Switch>
+      <Route path={`${path}/home`}>
+        <MealToCookView />
+      </Route>
       <Route path={`${path}/meals`}>
         <MealPlanView />
       </Route>
@@ -19,7 +23,7 @@ const DashboardRoutes = () => {
       <Route path={`${path}/favorites`}>
         <FavoriteRecipeListView />
       </Route>
-      <Redirect from="*" to={`${path}/meals`} />
+      <Redirect from="*" to={`${path}/home`} />
     </Switch>
   );
 };
