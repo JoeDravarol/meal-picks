@@ -5,6 +5,7 @@ import MealPlanView from 'features/dashboard/MealPlanView';
 import MealToCookView from 'features/dashboard/MealToCookView';
 import FavoriteRecipeListView from 'features/dashboard/FavoriteRecipeListView';
 import GroceryListView from 'features/dashboard/GroceryListView';
+import CreateRecipeView from 'features/dashboard/CreateRecipeView';
 
 const DashboardRoutes = () => {
   const { path } = useRouteMatch();
@@ -22,6 +23,9 @@ const DashboardRoutes = () => {
       </Route>
       <Route path={`${path}/favorites`}>
         <FavoriteRecipeListView />
+      </Route>
+      <Route path={`${path}/create-recipe`}>
+        <CreateRecipeView />
       </Route>
       <Redirect from="*" to={`${path}/home`} />
     </Switch>

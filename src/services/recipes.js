@@ -21,6 +21,17 @@ const getById = async id => {
   return response.data;
 };
 
+const create = async formData => {
+  const headers = {
+    ...tokenStorage.getConfig().headers,
+    'Content-Type': 'multipart/form-data',
+  };
+
+  const response = await axios.post(BASE_URL, formData, { headers });
+
+  return response.data;
+};
+
 const getAllFavorite = async () => {
   const response = await axios.get(BASE_URL_FAVORITE, tokenStorage.getConfig());
 
@@ -49,6 +60,7 @@ const removeFavorite = async id => {
 export default {
   getPage,
   getById,
+  create,
   getAllFavorite,
   addFavorite,
   removeFavorite,
