@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
-import DayCard from 'components/DayCard';
+import DayCard from 'features/dashboard/DayCard';
 
 import { getDatesOfCurrentWeek } from 'utils/date';
 

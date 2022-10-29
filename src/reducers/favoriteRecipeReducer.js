@@ -1,4 +1,4 @@
-import favoriteRecipeService from 'services/favoriteRecipes';
+import recipeService from 'services/recipes';
 
 const reducer = (state = [], action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ const reducer = (state = [], action) => {
 
 export const initializeFavRecipes = () => {
   return async dispatch => {
-    const recipes = await favoriteRecipeService.getAllFavorite();
+    const recipes = await recipeService.getAllFavorite();
 
     dispatch({
       type: 'INIT_FAV_RECIPES',
@@ -29,7 +29,7 @@ export const initializeFavRecipes = () => {
 
 export const addFavRecipe = id => {
   return async dispatch => {
-    const recipe = await favoriteRecipeService.addFavorite(id);
+    const recipe = await recipeService.addFavorite(id);
 
     dispatch({
       type: 'ADD_FAV_RECIPE',
@@ -40,7 +40,7 @@ export const addFavRecipe = id => {
 
 export const removeFavRecipe = id => {
   return async dispatch => {
-    await favoriteRecipeService.removeFavorite(id);
+    await recipeService.removeFavorite(id);
 
     dispatch({
       type: 'REMOVE_FAV_RECIPE',

@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import logoImg from 'images/logo.png';
+import logoImg from 'assets/images/logo.png';
 import { useAuth } from 'contexts/AuthContext';
 import { resetMealPlans } from 'reducers/mealPlanReducer';
 import { resetFavRecipes } from 'reducers/favoriteRecipeReducer';

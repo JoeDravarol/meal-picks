@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import recipeService from 'services/recipes';
 import PaginationControlled from 'components/PaginationControlled';
-import RecipeCard from 'components/RecipeCard';
+import RecipeCard from 'features/recipe/RecipeCard';
 import Loader from 'components/Loader';
 
 const RecipeListPage = () => {

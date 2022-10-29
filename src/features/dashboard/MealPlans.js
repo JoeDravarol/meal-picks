@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-import DashboardRecipeCard from 'components/DashboardRecipeCard';
+import DashboardRecipeCard from 'features/dashboard/DashboardRecipeCard';
 
 const useStyles = makeStyles(theme => ({
   header: {
