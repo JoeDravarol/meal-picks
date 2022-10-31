@@ -19,10 +19,39 @@ const useProvideAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Prevent unauthorized user from accessing /dashboard
-    // 2. Set authorized user token
-    handleUser(user);
-  }, [user]);
+    if (!user) return setLoading(false);
+
+    // Save localStorage user token to check for validity
+    tokenStorage.setToken(user.token);
+
+    // Return expiration time on valid token for auto logout
+    const checkValidToken = async () => {
+      try {
+        const { expiresIn } = await userService.me();
+        setLoading(false);
+        return expiresIn;
+      } catch (exception) {
+        setUser(null);
+        setLoading(false);
+        console.error(exception.response.data.error);
+      }
+    };
+
+    let timeoutId;
+
+    const autoLogout = async () => {
+      const tokenExpiresIn = await checkValidToken();
+      timeoutId = setTimeout(() => {
+        setUser(null);
+      }, tokenExpiresIn);
+    };
+
+    autoLogout();
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [user, setUser]);
 
   const handleUser = async user => {
     if (user) {
