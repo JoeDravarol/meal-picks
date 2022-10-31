@@ -27,6 +27,12 @@ const useStyles = makeStyles(theme => ({
         ? theme.palette.secondary.dark
         : theme.palette.secondary.main;
     },
+    transform: 'scale(0.75)',
+    '@media (min-width: 1800px)': {
+      transform: 'scale(1)',
+      // Prevent card from scaling with container
+      height: 'fit-content',
+    },
   },
   dayTitle: {
     fontFamily: theme.typography.fontFamily,
