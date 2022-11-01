@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
+import { makeStyles } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import recipeService from 'services/recipes';
 import RecipeDetails from 'features/recipe/RecipeDetails';
@@ -14,7 +18,20 @@ const modalStyles = {
   alignContent: 'center',
 };
 
+const useStyles = makeStyles(theme => ({
+  container: {
+    [theme.breakpoints.up('md')]: {
+      maxWidth: 850,
+    },
+  },
+  arrowBackIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
+
 const RecipeDetailsPage = () => {
+  const classes = useStyles();
+  const history = useHistory();
   const { id } = useParams();
   const auth = useAuth();
   const [recipe, setRecipe] = useState(null);
@@ -49,6 +66,12 @@ const RecipeDetailsPage = () => {
           <LoginForm />
         </div>
       </Modal>
+      <Container className={classes.container}>
+        <Button onClick={history.goBack}>
+          <ArrowBackIcon className={classes.arrowBackIcon} />
+          Go back
+        </Button>
+      </Container>
       <RecipeDetails
         data={recipe}
         isAuth={auth.isAuthenticated()}
