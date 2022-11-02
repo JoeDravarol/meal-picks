@@ -7,6 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import DashboardRecipeCard from 'features/dashboard/DashboardRecipeCard';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    gridRow: 'span 2',
+  },
   header: {
     marginBottom: theme.spacing(3),
   },

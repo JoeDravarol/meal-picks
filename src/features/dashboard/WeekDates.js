@@ -16,13 +16,18 @@ const useStyles = makeStyles(theme => ({
   root: {
     overflow: 'auto',
     height: 'fit-content',
-    '@media (min-width: 1628px)': {
-      overflow: 'initial',
-    },
   },
   datesContainer: {
     display: 'flex',
-    gridGap: theme.spacing(3),
+    overflow: 'auto',
+    '@media (min-width: 1628px)': {
+      overflow: 'initial',
+    },
+    '@media (min-width: 1800px)': {
+      // Prevent DayCard from clipping
+      height: '150px',
+      gridGap: theme.spacing(3),
+    },
   },
 }));
 

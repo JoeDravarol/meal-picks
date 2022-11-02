@@ -21,8 +21,11 @@ const useStyles = makeStyles(theme => ({
     borderRadius: 0,
   },
   media: {
-    height: 400,
+    height: 200,
     objectFit: 'cover',
+    [theme.breakpoints.up('sm')]: {
+      height: 400,
+    },
   },
   content: {
     padding: theme.spacing(3),

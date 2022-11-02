@@ -30,8 +30,6 @@ const MealPlanView = () => {
     setTodayMealPlan(todaysMeal?.recipes || []);
   }, [allMealPlans]);
 
-  console.log(todayMealPlan);
-
   return (
     <div>
       <Box mb={3}>
