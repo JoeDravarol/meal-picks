@@ -1,78 +1,43 @@
-import React, { useState } from 'react';
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import NoteAddIcon from '@material-ui/icons/NoteAdd';
-
-import useMultiInputField from 'hooks/useMultiInputField';
-import MultiInputField from 'features/dashboard/MultiInputField';
-import UploadAndDisplayImage from 'features/dashboard/UploadAndDisplayImage';
-import recipeService from 'services/recipes';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    marginTop: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    background: 'white',
-    padding: theme.spacing(5),
-  },
-  avatar: {
-    margin: theme.spacing(1),
-  },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  button: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  link: {
-    textAlign: 'right',
-    display: 'block',
-  },
-  multiFieldDiv: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(1),
-  },
-  multiFieldSize: {
-    marginTop: 16,
-    marginBottom: 8,
-    minHeight: 56,
-  },
-}));
+import recipeService from 'services/recipes';
+import useMultiInputField from 'hooks/useMultiInputField';
+import useImageFile from 'hooks/useImageFile';
+import useField from 'hooks/useField';
+import RecipeForm from 'features/recipe/RecipeForm';
 
-const CreateRecipeForm = () => {
-  const classes = useStyles();
+const CreateRecipeView = () => {
   const history = useHistory();
+  const recipeLink = useField('Link to recipe', 'text', { autoFocus: true });
+  const name = useField('Name', 'text', { required: true });
+  const description = useField('Description', 'text', {
+    required: true,
+    multiline: true,
+  });
+  const prepTime = useField('Prep Time', 'text', { placeholder: '30 minutes' });
+  const activeTime = useField('Active Time', 'text', {
+    required: true,
+    placeholder: '30 minutes',
+  });
+  const cookTime = useField('Cook Time', 'text', { placeholder: '1:30 hours' });
+  const totalTime = useField('Total Time', 'text', {
+    required: true,
+    placeholder: '2 hours',
+  });
+  const servings = useField('Servings', 'number', { required: true });
   const ingredients = useMultiInputField();
   const instructions = useMultiInputField();
-  const [imageFile, setImageFile] = useState(null);
-
-  const handleUploadImage = e => {
-    const file = e.target.files[0];
-    setImageFile(file);
-  };
-
-  const handleRemoveImage = () => {
-    setImageFile(null);
-  };
+  const image = useImageFile();
 
   const onSubmit = async e => {
     e.preventDefault();
 
     const time = {
-      prep: e.target.prepTime.value,
-      active: e.target.activeTime.value,
-      cook: e.target.cookTime.value,
-      total: e.target.totalTime.value,
+      prep: prepTime.value,
+      active: activeTime.value,
+      cook: cookTime.value,
+      total: totalTime.value,
     };
     // Extract the value from the object
     const ingredientsArr = ingredients.fields.map(obj => obj.value);
@@ -80,20 +45,20 @@ const CreateRecipeForm = () => {
 
     // Turn array & object to JSON so it can be read in backend
     const recipeInfo = {
-      name: e.target.name.value,
-      description: e.target.description.value,
-      servings: e.target.servings.value,
+      name: name.value,
+      description: description.value,
+      servings: servings.value,
       time: JSON.stringify(time),
       ingredients: JSON.stringify(ingredientsArr),
       instructions: JSON.stringify(instructionsArr),
-      url: e.target.recipeLink.value,
+      url: recipeLink.value,
     };
 
     try {
       // FormData set Boundry which enables frontend to send files to server
       const formData = new FormData();
 
-      formData.append('file', imageFile);
+      formData.append('file', image.file);
 
       for (let key in recipeInfo) {
         formData.append(key, recipeInfo[key]);
@@ -108,114 +73,22 @@ const CreateRecipeForm = () => {
   };
 
   return (
-    <Container className={classes.root} maxWidth="sm">
-      <Avatar className={classes.avatar}>
-        <NoteAddIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Create new recipe
-      </Typography>
-
-      <form className={classes.form} onSubmit={onSubmit}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="recipeLink"
-          label="Link to recipe"
-          name="recipeLink"
-          autoFocus
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="name"
-          label="Name"
-          name="name"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          multiline
-          id="description"
-          label="Description"
-          name="description"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="prepTime"
-          label="Prep Time"
-          name="prepTime"
-          placeholder="30 minutes"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="activeTime"
-          label="Active Time"
-          name="activeTime"
-          placeholder="30 minutes"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          fullWidth
-          id="cookTime"
-          label="Cook Time"
-          name="cookTime"
-          placeholder="1:30 hours"
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="totalTime"
-          label="Total Time"
-          name="totalTime"
-          placeholder="2 hours"
-        />
-        <TextField
-          type="number"
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="servings"
-          label="Servings"
-          name="servings"
-          InputProps={{ inputProps: { min: 1 } }}
-        />
-
-        <MultiInputField title="Ingredients" {...ingredients} />
-        <MultiInputField title="Instructions" {...instructions} isMultiLine />
-
-        <UploadAndDisplayImage
-          image={imageFile}
-          handleUpload={handleUploadImage}
-          handleRemove={handleRemoveImage}
-        />
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.button}
-        >
-          Submit
-        </Button>
-      </form>
-    </Container>
+    <RecipeForm
+      formTitle="Create new recipe"
+      recipeLink={recipeLink}
+      name={name}
+      description={description}
+      prepTime={prepTime}
+      activeTime={activeTime}
+      cookTime={cookTime}
+      totalTime={totalTime}
+      servings={servings}
+      ingredients={ingredients}
+      instructions={instructions}
+      image={image}
+      onSubmit={onSubmit}
+    />
   );
 };
 
-export default CreateRecipeForm;
+export default CreateRecipeView;
