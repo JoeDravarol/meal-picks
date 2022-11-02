@@ -33,12 +33,12 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 150,
-    maxWidth: 370,
     margin: '0 auto',
     objectFit: 'cover',
 
     [theme.breakpoints.up('md')]: {
       borderRadius: 15,
+      maxWidth: 370,
       margin: 0,
     },
   },
