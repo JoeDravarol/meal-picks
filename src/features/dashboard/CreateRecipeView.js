@@ -39,9 +39,6 @@ const CreateRecipeView = () => {
       cook: cookTime.value,
       total: totalTime.value,
     };
-    // Extract the value from the object
-    const ingredientsArr = ingredients.fields.map(obj => obj.value);
-    const instructionsArr = ingredients.fields.map(obj => obj.value);
 
     // Turn array & object to JSON so it can be read in backend
     const recipeInfo = {
@@ -49,8 +46,8 @@ const CreateRecipeView = () => {
       description: description.value,
       servings: servings.value,
       time: JSON.stringify(time),
-      ingredients: JSON.stringify(ingredientsArr),
-      instructions: JSON.stringify(instructionsArr),
+      ingredients: JSON.stringify(ingredients.getValue()),
+      instructions: JSON.stringify(instructions.getValue()),
       url: recipeLink.value,
     };
 

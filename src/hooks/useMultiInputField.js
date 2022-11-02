@@ -19,11 +19,17 @@ const useMultiInputField = () => {
     setFields(newFields);
   };
 
+  // Extract the value from the object
+  const getValue = () => {
+    return fields.map(obj => obj.value);
+  };
+
   return {
     fields,
     handleChange,
     addField,
     removeField,
+    getValue,
   };
 };
 
