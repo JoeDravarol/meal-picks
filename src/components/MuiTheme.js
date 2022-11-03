@@ -30,6 +30,10 @@ const theme = createTheme({
     h2: {
       fontFamily: '"Dosis", "Helvetica", "Arial", sans-serif',
       fontWeight: 700,
+      fontSize: '2.5rem',
+      '@media screen and (min-width: 1240px)': {
+        fontSize: '3.7rem',
+      },
     },
     h3: {
       fontFamily: '"Dosis", "Helvetica", "Arial", sans-serif',

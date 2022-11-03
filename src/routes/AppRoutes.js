@@ -8,10 +8,16 @@ import Layout from 'components/Layout';
 import AuthRoute from 'routes/AuthRoute';
 import SignupForm from 'features/authentication/SignupForm';
 import LoginForm from 'features/authentication/LoginForm';
+import HomePage from 'pages/HomePage';
 
 const AppRoutes = () => {
   return (
     <Switch>
+      <Route exact path="/">
+        <Layout>
+          <HomePage />
+        </Layout>
+      </Route>
       <Route exact path="/recipes">
         <Layout>
           <RecipeListPage />
