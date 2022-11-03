@@ -1,4 +1,4 @@
-export const truncateString = (str, limit = 165) => {
+export const truncateString = (str, limit = 160) => {
   const strWithSpaceRemoved = str.replace(/ /g, '');
 
   if (strWithSpaceRemoved.length < limit) return str;
