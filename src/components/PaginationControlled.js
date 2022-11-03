@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
 
 const styles = {
@@ -7,8 +8,9 @@ const styles = {
   justifyContent: 'center',
 };
 
-const PaginationControlled = ({ totalPage, handlePagination }) => {
-  const [page, setPage] = useState(1);
+const PaginationControlled = ({ currentPage, totalPage, handlePagination }) => {
+  const history = useHistory();
+  const [page, setPage] = useState(currentPage);
 
   useEffect(() => {
     window.scrollTo({
@@ -21,6 +23,7 @@ const PaginationControlled = ({ totalPage, handlePagination }) => {
     if (value !== page) {
       setPage(value);
       handlePagination(value);
+      history.push(`/recipes?page=${value}`);
     }
   };
 
