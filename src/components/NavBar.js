@@ -35,7 +35,7 @@ const NavBar = () => {
     <nav>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <Link to="/" className={classes.logo}>
+          <Link to="/recipes?page=1" className={classes.logo}>
             <img className={classes.logoImg} src={logoImg} alt="Logo" />
             <Typography variant="h5" component="h1">
               Meal Picks

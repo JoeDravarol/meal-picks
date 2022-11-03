@@ -12,7 +12,7 @@ import LoginForm from 'features/authentication/LoginForm';
 const AppRoutes = () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/recipes">
         <Layout>
           <RecipeListPage />
         </Layout>

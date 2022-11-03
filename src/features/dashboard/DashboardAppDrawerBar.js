@@ -110,7 +110,11 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
   const logo = (
     <div className={classes.toolbar}>
       <List>
-        <ListItem className={classes.logo} component={Link} to="/">
+        <ListItem
+          className={classes.logo}
+          component={Link}
+          to="/recipes?page=1"
+        >
           <ListItemIcon>
             <img src={logoImg} alt="logo" />
           </ListItemIcon>
