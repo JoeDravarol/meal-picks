@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -97,9 +98,10 @@ const Hero = () => {
         </Button>
         <Button
           variant="outlined"
-          component={Box}
-          py={1.5}
+          component={Link}
           href="#how-it-works"
+          color="common"
+          underline="none"
         >
           Learn more
         </Button>
