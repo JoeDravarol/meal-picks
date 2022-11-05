@@ -139,7 +139,7 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
   };
 
   return (
-    <Box my={1}>
+    <Box my={1} mb={10}>
       <Box className={classes.recipeTitleSidebar} border={2} py={3} mx="auto">
         <Container className={classes.recipeTitleSidebarContainer}>
           <Typography
