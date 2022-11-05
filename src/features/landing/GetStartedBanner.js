@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -49,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 
 const GetStartedBanner = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Paper className={classes.paper}>
@@ -65,7 +67,12 @@ const GetStartedBanner = () => {
         >
           Sign up now, 100% free for life. What have you got to lose?
         </Typography>
-        <Button className={classes.button} variant="contained" color="primary">
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="primary"
+          onClick={() => history.push('/signup')}
+        >
           Sign up
         </Button>
       </Container>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -57,6 +58,7 @@ const useStyles = makeStyles(theme => ({
 
 const Hero = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
     <Grid
@@ -93,6 +95,7 @@ const Hero = () => {
           component={Box}
           py={1.5}
           mr={2}
+          onClick={() => history.push('/signup')}
         >
           Sign up now
         </Button>
