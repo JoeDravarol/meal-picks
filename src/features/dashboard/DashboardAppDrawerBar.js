@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -88,6 +88,7 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { url } = useRouteMatch();
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -130,18 +131,20 @@ const DashboardAppDrawerBar = ({ dashboardRoutes, children }) => {
     </div>
   );
 
+  const currentPathname = location.pathname.replace('/dashboard/', '/');
+
   const drawer = (
     <nav>
       {logo}
       <Divider />
 
       <List>
-        {dashboardRoutes.map(({ text, linkTo, icon }, idx) => (
+        {dashboardRoutes.map(({ text, linkTo, icon, routeName }, idx) => (
           <ListItem
             key={text}
             className={classes.drawerListItem}
             classes={{ selected: classes.selected }}
-            selected={selectedIndex === idx}
+            selected={linkTo === currentPathname}
             onClick={event => handleListItemClick(event, idx)}
             component={Link}
             to={url + linkTo}
