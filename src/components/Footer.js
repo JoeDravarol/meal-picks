@@ -43,9 +43,5 @@ export default Footer;
 export const StickyFooterContainer = ({ children }) => {
   const classes = useStyles();
 
-  return (
-    <div className={classes.root} fullWidth>
-      {children}
-    </div>
-  );
+  return <div className={classes.root}>{children}</div>;
 };
