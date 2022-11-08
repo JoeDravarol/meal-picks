@@ -22,8 +22,6 @@ const HomePage = () => {
     fetchReipes();
   }, []);
 
-  console.log(recipes);
-
   return (
     <>
       <Hero />
