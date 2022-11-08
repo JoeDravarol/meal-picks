@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
@@ -9,11 +10,14 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Container from '@material-ui/core/Container';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
 
 import { addFavRecipe, removeFavRecipe } from 'reducers/favoriteRecipeReducer';
+import { useAuth } from 'contexts/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   recipeTitleSidebar: {
@@ -98,10 +102,13 @@ const useStyles = makeStyles(theme => ({
 const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const auth = useAuth();
   const favorited = useSelector(state =>
     state.favoriteRecipes.find(r => r.id === data.id)
   );
   const [isFavorite, setIsFavorite] = useState(!!favorited);
+  const isEditable = auth.user?.username === data?.user?.username; // username is unique
 
   // To avoid stale props
   useEffect(() => {
@@ -138,6 +145,10 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
     }
   };
 
+  const handleEditRecipeClick = id => {
+    history.push(`/recipes/edit/${id}`);
+  };
+
   return (
     <Box my={1} mb={10}>
       <Box className={classes.recipeTitleSidebar} border={2} py={3} mx="auto">
@@ -149,16 +160,32 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
           >
             {data.name}
           </Typography>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            onClick={handleClick}
-            startIcon={
-              isFavorite ? <Favorite color="primary" /> : <FavoriteBorderIcon />
-            }
-          >
-            Save Recipe
-          </Button>
+          <ButtonGroup orientation="vertical">
+            {isEditable && (
+              <Button
+                className={classes.button}
+                variant="outlined"
+                onClick={() => handleEditRecipeClick(data.id)}
+                startIcon={<NoteAddIcon />}
+              >
+                Edit Recipe
+              </Button>
+            )}
+            <Button
+              className={classes.button}
+              variant="outlined"
+              onClick={handleClick}
+              startIcon={
+                isFavorite ? (
+                  <Favorite color="primary" />
+                ) : (
+                  <FavoriteBorderIcon />
+                )
+              }
+            >
+              Save Recipe
+            </Button>
+          </ButtonGroup>
         </Container>
       </Box>
 

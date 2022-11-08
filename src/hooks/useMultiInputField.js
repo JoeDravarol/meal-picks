@@ -24,12 +24,18 @@ const useMultiInputField = () => {
     return fields.map(obj => obj.value);
   };
 
+  const initValue = (arr = []) => {
+    const editableByInputField = arr.map(value => ({ value }));
+    setFields(editableByInputField);
+  };
+
   return {
     fields,
     handleChange,
     addField,
     removeField,
     getValue,
+    initValue,
   };
 };
 

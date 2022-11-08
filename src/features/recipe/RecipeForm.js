@@ -59,6 +59,7 @@ const RecipeForm = ({
   ingredients,
   instructions,
   image,
+  disbledImageButton,
   onSubmit,
 }) => {
   const classes = useStyles();
@@ -135,9 +136,10 @@ const RecipeForm = ({
         <MultiInputField title="Instructions" {...instructions} isMultiLine />
 
         <UploadAndDisplayImage
-          image={image.file}
+          image={image.url}
           handleUpload={image.upload}
           handleRemove={image.remove}
+          disableButton={disbledImageButton}
         />
 
         <Button
