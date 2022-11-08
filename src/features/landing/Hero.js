@@ -74,15 +74,10 @@ const Hero = () => {
         xs={12}
         sm={6}
       >
-        <Typography variant="h2" component="h1" colorInherit>
+        <Typography variant="h2" component="h1">
           Online weekly meal planning made easy
         </Typography>
-        <Typography
-          className={classes.paragraph}
-          variant="h5"
-          component="p"
-          colorInherit
-        >
+        <Typography className={classes.paragraph} variant="h5" component="p">
           <Typography variant="h5" component="span" color="primary">
             Meal Picks
           </Typography>{' '}
@@ -103,7 +98,6 @@ const Hero = () => {
           variant="outlined"
           component={Link}
           href="#how-it-works"
-          color="common"
           underline="none"
         >
           Learn more
