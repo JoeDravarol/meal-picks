@@ -32,6 +32,15 @@ const create = async formData => {
   return response.data;
 };
 
+const update = async (id, newObject) => {
+  const response = await axios.put(
+    `${BASE_URL}/edit/${id}`,
+    newObject,
+    tokenStorage.getConfig()
+  );
+  return response.data;
+};
+
 const getAllFavorite = async () => {
   const response = await axios.get(BASE_URL_FAVORITE, tokenStorage.getConfig());
 
@@ -61,6 +70,7 @@ export default {
   getPage,
   getById,
   create,
+  update,
   getAllFavorite,
   addFavorite,
   removeFavorite,

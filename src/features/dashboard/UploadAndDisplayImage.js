@@ -4,7 +4,12 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-const UploadAndDisplayImage = ({ image, handleUpload, handleRemove }) => {
+const UploadAndDisplayImage = ({
+  image,
+  handleUpload,
+  handleRemove,
+  disableButton,
+}) => {
   return (
     <>
       <Typography variant="h5">Upload recipe photo</Typography>
@@ -12,13 +17,14 @@ const UploadAndDisplayImage = ({ image, handleUpload, handleRemove }) => {
       <Box display="flex" flexDirection="column" alignItems="flex-end">
         {image && (
           <>
-            <img
-              alt="not found"
-              width={'100%'}
-              src={URL.createObjectURL(image)}
-            />
+            <img alt="not found" width={'100%'} src={image} />
             <label htmlFor="imageFile">
-              <Button variant="text" component="span" onClick={handleRemove}>
+              <Button
+                variant="text"
+                component="span"
+                onClick={handleRemove}
+                disabled={disableButton}
+              >
                 Remove
               </Button>
             </label>

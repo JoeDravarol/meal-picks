@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import RecipeListPage from 'pages/RecipeListPage';
+import RecipeEditPage from 'pages/RecipeEditPage';
 import RecipeDetailsPage from 'pages/RecipeDetailsPage';
 import DashboardPage from 'pages/DashboardPage';
 import Layout from 'components/Layout';
@@ -21,6 +22,12 @@ const AppRoutes = () => {
       <Route exact path="/recipes">
         <Layout>
           <RecipeListPage />
+        </Layout>
+      </Route>
+
+      <Route path="/recipes/edit/:id">
+        <Layout>
+          <RecipeEditPage />
         </Layout>
       </Route>
 
