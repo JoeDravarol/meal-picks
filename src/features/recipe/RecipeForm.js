@@ -14,6 +14,7 @@ import UploadAndDisplayImage from 'features/dashboard/UploadAndDisplayImage';
 const useStyles = makeStyles(theme => ({
   root: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
