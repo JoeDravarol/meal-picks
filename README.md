@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+# Meal Picks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Meal Picks is a fully responsive web application for managing recipes, planning meals, building shopping lists and much more.
 
-## Available Scripts
+![Preview of Meal Picks homepage](src/assets/images/homepage-preview.png)
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+[Live version on Netifly](https://meal-picks.netlify.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Getting Started](https://github.com/joedravarol/meal-picks#getting-started)
+- [Built With](https://github.com/joedravarol/meal-picks#built-with)
+- [Contributors](https://github.com/joedravarol/meal-picks#contributors)
+- [License](https://github.com/joedravarol/meal-picks#license)
+- [Acknowledgement](https://github.com/joedravarol/meal-picks#acknowledgement)
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `npm run build`
+### Prerequisite
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Node.js
+- Npm
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installing
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Fork this repository on Github.
+1. Clone your forked repository onto your local computer.
+1. Use `$ cd meal-picks` to move into the project directory.
+1. `$ npm install` to install the required dependencies.
+1. `$ nmp start` to run a local development server.
+1. Explore and enjoy!
 
-### `npm run eject`
+## Built with
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- React (hooks)
+- Redux
+- React Router
+- Axios
+- Material UI
+- Continuous deployment with Netifly
+- Prettier
+- ESLint
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributors
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Joe Lee** - Initial work
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
+This project is licensed under the MIT license - see the [LICENSE](LICENSE) file for details
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Acknowledgement
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Pixabay](https://www.pexels.com/@pixabay/) - Images on [Pexels](https://www.pexels.com/photo/berries-blackberries-close-up-cocktail-434295/)
+- [Alex lvrs](https://unsplash.com/@alexlvrs) - Images on [Unsplash](https://unsplash.com/photos/sBDJADrnsbY)
+- [Marina Pavlović](https://dribbble.com/marinapavlovic) - [Design Inspiration](https://dribbble.com/shots/13534538-EasyMeals-Food-Blog-WordPress-Theme)
+- [Arron Hunt](https://dribbble.com/arronhunt) - [Design Inspiration](https://dribbble.com/shots/1884597-Meal-planning-landing-page)
+- [Astral](https://astralapp.com/) - [Design Inspiration](https://astralapp.com/)
+- [Caddiesoft](https://dribbble.com/Caddiesoft) - [Design Inspiration](https://dribbble.com/shots/14347541-Meal-Prep-Delivery-Service-App)
+- [Yvonne Lee](https://dribbble.com/yvonneleedesign) - [Design Inspiration](https://dribbble.com/shots/12208637-Calendar-Meal-Prep-Dashboard)
+- [Epicurious](https://www.epicurious.com/) - [Design Inspiration](https://www.epicurious.com/recipes-menus/the-best-new-pasta-recipes-to-try-gallery)
