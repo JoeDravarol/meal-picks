@@ -209,9 +209,25 @@ const RecipeDetails = ({ data, handleModalOpen, isAuth }) => {
             <dd className={classes.dd}>{data.servings}</dd>
             <br />
 
-            <dt className={classes.dt}>Prep Time</dt>
+            {data.time.prep && (
+              <>
+                <dt className={classes.dt}>Prep Time</dt>
+                <dd className={classes.dd}>{data.time.prep}</dd>
+                <br />
+              </>
+            )}
+
+            <dt className={classes.dt}>Active Time</dt>
             <dd className={classes.dd}>{data.time.active}</dd>
             <br />
+
+            {data.time.cook && (
+              <>
+                <dt className={classes.dt}>Cook Time</dt>
+                <dd className={classes.dd}>{data.time.cook}</dd>
+                <br />
+              </>
+            )}
 
             <dt className={classes.dt}>Total Time</dt>
             <dd className={classes.dd}>{data.time.total}</dd>
