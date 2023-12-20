@@ -1,4 +1,4 @@
-const BASE_URL = 'https://drab-tan-cow-wig.cyclic.app/';
+const BASE_URL = 'https://drab-tan-cow-wig.cyclic.app';
 // const BASE_URL = 'http://localhost:3001';
 
 export const concatBaseUrl = path => {
